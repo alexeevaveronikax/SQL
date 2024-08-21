@@ -29,6 +29,25 @@ from Laptop,Product
 where laptop.hd >=10
 and laptop.model=product.model
 -------------------------------------------------------------
+Задание: 7 (Serge I: 2002-11-02)
+
+Найдите номера моделей и цены всех имеющихся в продаже продуктов (любого типа) производителя B (латинская буква).
+SELECT laptop.model,laptop.price 
+FROM laptop,product
+where product.model=laptop.model
+and product.maker='B'
+union
+SELECT pc.model,pc.price 
+FROM pc,product
+where product.model=pc.model
+and product.maker='B'
+union
+SELECT printer.model,printer.price 
+FROM printer,product
+where product.model=printer.model
+and product.maker='B'
+-----------------------------------------------------------
+
 Задание: 9 (Serge I: 2002-11-02)
 
 Найдите производителей ПК с процессором не менее 450 Мгц. Вывести: Maker
