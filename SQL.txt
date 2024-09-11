@@ -1,0 +1,80 @@
+Задание: 3 (Serge I: 2002-09-30)
+
+Найдите номер модели, объем памяти и размеры экранов ПК-блокнотов, цена которых превышает 1000 дол.
+Select model,ram,screen 
+from laptop
+where price>1000
+----------------------------------------------------------------------------------------------
+Задание: 4 (Serge I: 2002-09-21)
+
+Найдите все записи таблицы Printer для цветных принтеров.
+Select * 
+from Printer 
+where color='y'
+--------------------------------------------------------------------
+Задание: 5 (Serge I: 2002-09-30)
+
+Найдите номер модели, скорость и размер жесткого диска ПК, имеющих 12x или 24x CD и цену менее 600 дол.
+
+Select model,speed,hd
+from PC
+where price<600
+and (cd='12x' or cd='24x')
+--------------------------------------------------------------
+Задание: 6 (Serge I: 2002-10-28)
+
+Для каждого производителя, выпускающего ПК-блокноты c объёмом жесткого диска не менее 10 Гбайт, найти скорости таких ПК-блокнотов. Вывод: производитель, скорость.
+Select Product.maker,laptop.speed
+from Laptop,Product
+where laptop.hd >=10
+and laptop.model=product.model
+-------------------------------------------------------------
+Задание: 7 (Serge I: 2002-11-02)
+
+Найдите номера моделей и цены всех имеющихся в продаже продуктов (любого типа) производителя B (латинская буква).
+SELECT laptop.model,laptop.price 
+FROM laptop,product
+where product.model=laptop.model
+and product.maker='B'
+union
+SELECT pc.model,pc.price 
+FROM pc,product
+where product.model=pc.model
+and product.maker='B'
+union
+SELECT printer.model,printer.price 
+FROM printer,product
+where product.model=printer.model
+and product.maker='B'
+-----------------------------------------------------------
+Задание: 8 (Serge I: 2003-02-03)
+
+Найдите производителя, выпускающего ПК, но не ПК-блокноты.
+
+select distinct p.maker
+from product as p
+where p.type = 'PC'
+and p.maker not in
+(select p.maker
+from product as p
+where p.type = 'Laptop')
+
+---------------------------------------------------------------
+Задание: 9 (Serge I: 2002-11-02)
+
+Найдите производителей ПК с процессором не менее 450 Мгц. Вывести: Maker
+
+Select Product.maker from Product,PC
+where PC.speed >=450
+and product.model=pc.model
+group by Product.maker
+---------------------------------------------------
+Задание: 10 (Serge I: 2002-09-23)
+
+Найдите модели принтеров, имеющих самую высокую цену. Вывести: model, price
+
+Select model,price from printer
+where price = 
+(select max(price) from printer)
+
+
